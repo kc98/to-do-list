@@ -8,4 +8,27 @@ use Illuminate\Database\Eloquent\Model;
 class Todo extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'uuid',
+        'todo'
+    ];
+
+    public function save(array $options = []): bool
+    {
+        if (!session()->has('todos')) {
+            session()->put('todos', []);
+        }
+
+        session()->push('todos', $this->toJson());
+
+        return true;
+    }
+
+    public static function loadFromSession()
+    {
+        return collect(session()->get('todos'))->map(function ($todo) {
+            return json_decode($todo, false);
+        })->reverse();
+    }
 }

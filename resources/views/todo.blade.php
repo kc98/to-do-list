@@ -12,15 +12,22 @@
     <h1>Todo List</h1>
     <form action="/todo" method="post">
         @csrf
-        <input type="text" name="todo" id="todo" placeholder="Add your new todo" />
+        <input type="text" name="todo" id="todo" placeholder="Add your new todo"
+            class="@error('todo') is-invalid @enderror" />
         <button type="submit">Submit</button>
+
+        @error('todo')
+            <div style="color: red">{{ $message }}</div>
+        @enderror
     </form>
     <ul>
-        <li>test <button>Delete</button></li>
-        <li>test <button>Delete</button></li>
-        <li>test <button>Delete</button></li>
-        <li>test <button>Delete</button></li>
-        <li>test <button>Delete</button></li>
+        @if ($todos)
+            @foreach ($todos as $todo)
+                <li>{{ $todo->todo }} <button>Delete</button></li>
+            @endforeach
+        @else
+            <p>No todo, create one now!</p>
+        @endif
     </ul>
 </body>
 

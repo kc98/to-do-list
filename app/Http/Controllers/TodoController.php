@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Todo;
 use App\Http\Requests\StoreTodoRequest;
 use App\Http\Requests\UpdateTodoRequest;
+use Illuminate\Support\Str;
 
 class TodoController extends Controller
 {
@@ -13,15 +14,7 @@ class TodoController extends Controller
      */
     public function index()
     {
-        return view('todo');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return view('todo', ['todos' => Todo::loadFromSession()]);
     }
 
     /**
@@ -29,7 +22,10 @@ class TodoController extends Controller
      */
     public function store(StoreTodoRequest $request)
     {
-        //
+        $todo = new Todo([...$request->validated(), 'uuid' => Str::uuid()]);
+        $todo->save();
+
+        return view('todo', ['todos' => Todo::loadFromSession()]);
     }
 
     /**
