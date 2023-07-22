@@ -198,4 +198,10 @@ return [
 
     'same_site' => 'lax',
 
+    /**
+     * User idle time
+     *
+     * This option will determine how long the user can be idle before the todo list gets reset, in seconds.
+     */
+    'idle_time' => 300,
 ];

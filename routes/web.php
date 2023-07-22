@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TodoController;
+use App\Http\Middleware\CheckUserIdle;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('todo', TodoController::class);
+Route::resource('todo', TodoController::class)->middleware(CheckUserIdle::class);
