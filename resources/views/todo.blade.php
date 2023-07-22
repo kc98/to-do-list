@@ -21,9 +21,16 @@
         @enderror
     </form>
     <ul>
-        @if ($todos)
+        @if (count($todos) > 0)
             @foreach ($todos as $todo)
-                <li>{{ $todo->todo }} <button>Delete</button></li>
+                <li>
+                    {{ $todo->todo }}
+                    <form style="display: inline" action="/todo/{{ $todo->uuid }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button>Delete</button>
+                    </form>
+                </li>
             @endforeach
         @else
             <p>No todo, create one now!</p>

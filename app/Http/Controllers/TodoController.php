@@ -29,34 +29,20 @@ class TodoController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Todo $todo)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Todo $todo)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateTodoRequest $request, Todo $todo)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Todo $todo)
+    public function destroy(string $uuid)
     {
-        //
+        $todos = Todo::loadFromSession();
+        $todos->filter(function ($todo, $key) use ($uuid) {
+            if ($todo->uuid === $uuid) {
+                Todo::deleteOne($key);
+                return true;
+            }
+
+            return false;
+        });
+
+        return view('todo', ['todos' => Todo::loadFromSession()]);
     }
 }

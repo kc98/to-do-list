@@ -25,6 +25,17 @@ class Todo extends Model
         return true;
     }
 
+    public static function deleteOne(int $index)
+    {
+        if (!session()->has('todos')) {
+            session()->put('todos', []);
+        }
+
+        session()->pull("todos.$index");
+
+        return true;
+    }
+
     public static function loadFromSession()
     {
         return collect(session()->get('todos'))->map(function ($todo) {
