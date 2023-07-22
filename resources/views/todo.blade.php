@@ -9,7 +9,19 @@
 </head>
 
 <body>
-
+    <h1>Todo List</h1>
+    <form action="/todo" method="post">
+        @csrf
+        <input type="text" name="todo" id="todo" placeholder="Add your new todo" />
+        <button type="submit">Submit</button>
+    </form>
+    <ul>
+        <li>test <button>Delete</button></li>
+        <li>test <button>Delete</button></li>
+        <li>test <button>Delete</button></li>
+        <li>test <button>Delete</button></li>
+        <li>test <button>Delete</button></li>
+    </ul>
 </body>
 
 </html>
