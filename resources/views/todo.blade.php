@@ -36,6 +36,13 @@
             <p>No todo, create one now!</p>
         @endif
     </ul>
+    <script>
+        // Send a health check pulse to tell laravel that the tab is not closed
+        const healthCheckInterval = @json($health_check_interval);
+        setInterval(() => {
+            fetch('/health_check');
+        }, healthCheckInterval * 1000);
+    </script>
 </body>
 
 </html>

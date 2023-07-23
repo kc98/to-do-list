@@ -14,7 +14,10 @@ class TodoController extends Controller
      */
     public function index()
     {
-        return view('todo', ['todos' => Todo::loadFromSession()]);
+        return view('todo', [
+            'todos' => Todo::loadFromSession(),
+            'health_check_interval' => config('session.activity_pulse_time')
+        ]);
     }
 
     /**
@@ -25,7 +28,10 @@ class TodoController extends Controller
         $todo = new Todo([...$request->validated(), 'uuid' => Str::uuid()]);
         $todo->save();
 
-        return view('todo', ['todos' => Todo::loadFromSession()]);
+        return view('todo', [
+            'todos' => Todo::loadFromSession(),
+            'health_check_interval' => config('session.activity_pulse_time')
+        ]);
     }
 
     /**
@@ -43,6 +49,9 @@ class TodoController extends Controller
             return false;
         });
 
-        return view('todo', ['todos' => Todo::loadFromSession()]);
+        return view('todo', [
+            'todos' => Todo::loadFromSession(),
+            'health_check_interval' => config('session.activity_pulse_time')
+        ]);
     }
 }

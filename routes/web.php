@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HealthCheckController;
 use App\Http\Controllers\TodoController;
 use App\Http\Middleware\CheckUserIdle;
 use Illuminate\Support\Facades\Route;
@@ -15,4 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::redirect('/', 'todo', 301);
 Route::resource('todo', TodoController::class)->middleware(CheckUserIdle::class);
+Route::get('health_check', HealthCheckController::class);

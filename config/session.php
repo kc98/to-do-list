@@ -199,9 +199,13 @@ return [
     'same_site' => 'lax',
 
     /**
-     * User idle time
+     * Idle and inactivity timers
      *
-     * This option will determine how long the user can be idle before the todo list gets reset, in seconds.
+     * Idle time will determine how long the user can be idle before the todo list gets reset, in seconds.
+     * Inactivity time will determine how long before a session is considered invalid after closing the tab.
+     * Activity pulse time will determine how long before each health check pulse is sent, it must be set lower than the Inactivity Time.
      */
     'idle_time' => 300,
+    'inactivity_time' => 20,
+    'activity_pulse_time' => 10,
 ];
